@@ -2,71 +2,126 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Downloads</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             background: #0f0f0f;
             color: #e8e8e8;
-            padding: 40px;
+            padding: 20px;
+            margin: 0;
         }
+
         .container {
             max-width: 600px;
+            width: 100%;
             margin: auto;
             background: #1c1c1c;
-            padding: 30px;
+            padding: 25px;
             border-radius: 12px;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
-        h1 {
+
+        h1, h2 {
             text-align: center;
-            margin-top: 0;
         }
+
         .download {
-            margin: 25px 0;
+            margin: 20px 0;
             text-align: center;
         }
+
         .download a {
-            font-size: 20px;
+            font-size: 18px;
             color: #4ea8ff;
             text-decoration: none;
+            padding: 10px;
+            display: inline-block;
         }
-        .download a:hover {
-            text-decoration: underline;
-        }
+
         .wallet-box {
-            margin-top: 20px;
+            margin-top: 15px;
             padding: 15px;
             background: #262626;
             border-radius: 8px;
             font-family: monospace;
             word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .copy-btn {
+            margin-top: 12px;
+            width: 100%;
+            padding: 12px;
+            background: #4ea8ff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copy-btn.copied {
+            background: #3ddc84;
+        }
+
+        @media (max-width: 480px) {
+            .download a {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>My Downloads</h1>
+<div class="container">
+    <h1>My Downloads</h1>
 
-        <div class="download">
-            <a href="Heartbreak in Dubai.mp3" download>🎵 Download: Heartbreak in Dubai</a>
-        </div>
-
-        <div class="download">
-            <a href="https://www.mediafire.com/file/73u4bsi9jezqusb/Bala_Bala.mp4/file">🎵Download: Bala Bala Song</a>
-        </div>
-        
-        <div class="download">
-            <a href="Oh Ganesh!.mp3" download>🎵 Download: Oh Ganesh!</a>
-        </div>
-
-
-        <h2>My Monero Wallet</h2>
-        <div class="wallet-box">
-            monero:43b2tPsoQ6X6wSTiX9DMVmKjsZj5DLnUNEHNVRHNigLX7EszahDbcUJJEk3b3MMRkLC3gua31GHqxRsWYSuyWfaUQKcxzki
-        </div>
+    <div class="download">
+        <a href="Heartbreak in Dubai.mp3" download>🎵 Download: Heartbreak in Dubai</a>
     </div>
+
+    <div class="download">
+        <a href="https://www.mediafire.com/file/73u4bsi9jezqusb/Bala_Bala.mp4/file">🎵 Download: Bala Bala Song</a>
+    </div>
+
+    <div class="download">
+        <a href="Oh Ganesh!.mp3" download>🎵 Download: Oh Ganesh!</a>
+    </div>
+
+    <h2>My Monero Wallet</h2>
+
+    <div class="wallet-box" id="wallet">
+        monero:43b2tPsoQ6X6wSTiX9DMVmKjsZj5DLnUNEHNVRHNigLX7EszahDbcUJJEk3b3MMRkLC3gua31GHqxRsWYSuyWfaUQKcxzki
+    </div>
+
+    <button class="copy-btn" id="copyBtn" onclick="copyWallet()">
+        📋 Copy Wallet Address
+    </button>
+</div>
+
+<script>
+function copyWallet() {
+    const walletText = document.getElementById("wallet").innerText;
+    const btn = document.getElementById("copyBtn");
+
+    navigator.clipboard.writeText(walletText).then(() => {
+        btn.textContent = "✅ Copied!";
+        btn.classList.add("copied");
+
+        setTimeout(() => {
+            btn.textContent = "📋 Copy Wallet Address";
+            btn.classList.remove("copied");
+        }, 2000);
+    });
+}
+</script>
 </body>
 </html>
-
-
